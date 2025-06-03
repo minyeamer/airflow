@@ -9,7 +9,7 @@ with DAG(
     catchup=False,
     tags=["example"],
 ) as dag:
-    @task(task_id="python_task")
+    @task(task_id="show_templates")
     def show_templates(**kwargs):
         from pprint import pprint
         pprint(kwargs)
