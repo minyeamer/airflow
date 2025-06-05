@@ -1,4 +1,4 @@
-from airflow import DAG
+from airflow.sdk import DAG
 from airflow.providers.standard.operators.bash import BashOperator
 from airflow.timetables.trigger import CronTriggerTimetable
 import datetime as dt
@@ -13,7 +13,7 @@ with DAG(
     ),
     start_date=pendulum.datetime(2025, 1, 1, tz="Asia/Seoul"),
     catchup=False,
-    tags=["example"],
+    tags=["example", "template"],
 ) as dag:
     bash_task2 = BashOperator(
         task_id="bash_task2",
@@ -25,5 +25,3 @@ with DAG(
         },
         bash_command="echo \"Start date is $START_DATE \" && echo \"End date is $END_DATE\"",
     )
-
-    bash_task2

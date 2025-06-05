@@ -1,4 +1,4 @@
-from airflow import DAG
+from airflow.sdk import DAG
 from airflow.providers.standard.operators.python import PythonOperator
 import pendulum
 import random
@@ -8,7 +8,7 @@ with DAG(
     schedule="0 0 * * *",
     start_date=pendulum.datetime(2025, 1, 1, tz="Asia/Seoul"),
     catchup=False,
-    tags=["example"],
+    tags=["example", "python"],
 ) as dag:
     def select_country():
         COUNTRIES = [
@@ -22,5 +22,3 @@ with DAG(
         task_id="python_task",
         python_callable=select_country,
     )
-
-    python_task

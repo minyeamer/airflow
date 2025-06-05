@@ -1,6 +1,5 @@
-from airflow import DAG
+from airflow.sdk import DAG, Variable
 from airflow.providers.standard.operators.bash import BashOperator
-from airflow.sdk import Variable
 import pendulum
 
 with DAG(
@@ -8,7 +7,7 @@ with DAG(
     schedule="0 0 * * *",
     start_date=pendulum.datetime(2025, 1, 1, tz="Asia/Seoul"),
     catchup=False,
-    tags=["example"],
+    tags=["example", "xcom"],
 ) as dag:
     var = Variable.get("sample_key")
 

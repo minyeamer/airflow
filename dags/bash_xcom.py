@@ -1,4 +1,4 @@
-from airflow import DAG
+from airflow.sdk import DAG
 from airflow.providers.standard.operators.bash import BashOperator
 import pendulum
 
@@ -7,7 +7,7 @@ with DAG(
     schedule="0 0 * * *",
     start_date=pendulum.datetime(2025, 1, 1, tz="Asia/Seoul"),
     catchup=False,
-    tags=["example"],
+    tags=["example", "xcom"],
 ) as dag:
     bash_push_task = BashOperator(
         task_id="bash_push_task",
