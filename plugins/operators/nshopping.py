@@ -71,6 +71,8 @@ class NaverSearchToCsvOperator(BaseOperator):
             os.system(f"mkdir -p {dir_path}")
 
     def _to_csv(self, rows: List[List], file_path: str, encoding="utf-8", sep=','):
+        def clean(value: str) -> str:
+            return str(value).replace(sep, '')
         with open(file_path, 'w', encoding=encoding) as file:
             for row in rows:
-                file.write(sep.join(map(str, row))+'\n')
+                file.write(sep.join(map(clean, row))+'\n')
